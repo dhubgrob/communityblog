@@ -22,6 +22,7 @@
 		$sth->execute();
 		$user = $sth->fetch();
 
+	
 		//	S'il l'authentification est réussie…
 		if($user !== false AND password_verify(trim($_POST['password']), $user['hashed_password']))
 		{
