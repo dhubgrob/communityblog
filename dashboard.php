@@ -14,7 +14,6 @@ $dbh = new PDO
 
 // Lancement de la session
 	session_start();
-	var_dump($_SESSION['userid']);
 
 	//	Si l'utilisateur n'est pas authentifié
 	if(!array_key_exists('userid', $_SESSION))
@@ -24,7 +23,18 @@ $dbh = new PDO
 		exit;
 	}
 
+// suppression d'article
 
+array_flip($_GET);
+var_dump($_GET);
+        if(array_key_exists('id', $_GET) AND intval($_GET['id']) > 0)
+        {
+
+            $query = 'DELETE FROM POSTS WHERE id = ?';
+            $sth = $dbh->prepare($query);
+            $sth -> bindValue(1, $_GET['id'], PDO::PARAM_INT);
+            $sth->execute();
+		}
 
 // requête qui récupère le username du membre connecté
 	$query = 'SELECT username FROM writers WHERE id= :iduser';
@@ -33,16 +43,14 @@ $dbh = new PDO
 	$sth->execute();
 	$usernameSession = $sth->fetch();
 
-	var_dump($usernameSession);
-
 // requête qui récupère les articles déjà publiés
-	$query = 'SELECT title, publication_date FROM posts WHERE writerid= :writerid';
+	$query = 'SELECT title, publication_date, id FROM posts WHERE writerid= :writerid';
 	$sth = $dbh->prepare($query);
 	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
 	$sth->execute();
 	$publishedArticles = $sth->fetchAll();
 
-
+// gestion des upload d'images
 	if(array_key_exists('monFichier', $_FILES))
 	{
 		if($_FILES['monFichier']['error'] == 0)
@@ -87,13 +95,7 @@ if(!empty($_POST)) {
 	$sth->bindValue(':image', $urlImage, PDO::PARAM_STR);
 	$sth->execute();
 }
-	var_dump($publishedArticles);
-
-//Gestion envoi de fichier
 
 
-
-
-var_dump($_FILES);
 
 	include 'dashboard.phtml';

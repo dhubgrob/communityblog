@@ -8,5 +8,17 @@
 <body>
     <a href="signup.php">inscription</a>
     <a href="login.php">connexion</a>
+
+    <?php foreach($allArticles as $key => $article): ?>
+			
+				
+            <h4><?= $article['title'] ?></h4>
+            <h4>Publié le <?= $article['publication_date']; ?></h4>
+            <h4>Par <?= $article['username']; ?></h4>
+            <img src="http://localhost/projets/community_blog/uploads/<?= $article['image']; ?>">
+            <p><?= $article['content']; ?></p>
+        
+    
+<?php endforeach;?>
 </body>
 </html>
