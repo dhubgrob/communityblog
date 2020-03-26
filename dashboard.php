@@ -1,5 +1,6 @@
 <?php
 
+// Connexion à la bdd
 $dbh = new PDO
 (
 	'mysql:host=localhost;dbname=communityblog;charset=utf8',
@@ -11,6 +12,7 @@ $dbh = new PDO
 	]
 );
 
+// Lancement de la session
 	session_start();
 	var_dump($_SESSION['authentification']);
 
@@ -23,9 +25,7 @@ $dbh = new PDO
 	}
 
 
-
-	
-
+// requête qui récupère le username du membre connecté
 	$query = 'SELECT username FROM writers WHERE id= :iduser';
 	$sth = $dbh->prepare($query);
 	$sth->bindValue(':iduser', trim($_SESSION['authentification']), PDO::PARAM_STR);
@@ -34,4 +34,23 @@ $dbh = new PDO
 
 	var_dump($usernameSession);
 
+// requête qui récupère les articles déjà publiés
+	$query = 'SELECT title, publication_date FROM posts WHERE writerid= :writerid';
+	$sth = $dbh->prepare($query);
+	$sth->bindValue(':writerid', $_SESSION['authentification'], PDO::PARAM_STR);
+	$sth->execute();
+	$publishedArticles = $sth->fetch();
+
+//Pour publication nouvel article
+
+	$query = 'INSERT INTO posts (title, content, writerid, image) VALUES (:title, :content, :writerid, :image)';
+	$sth = $dbh->prepare($query);
+	$sth->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
+	$sth->bindValue(':content', $_POST['content'], PDO::PARAM_STR);
+	$sth->bindValue(':writerid', $_SESSION['authentification'], PDO::PARAM_STR);
+	$sth->bindValue(':image', 'null', PDO::PARAM_STR);
+	$sth->execute();
+
+	var_dump($publishedArticles);
+	var_dump($_POST);
 	include 'dashboard.phtml';
