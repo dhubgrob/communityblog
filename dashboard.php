@@ -48,13 +48,13 @@ if(!empty($_POST)) {
 	$sth->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
 	$sth->bindValue(':content', $_POST['content'], PDO::PARAM_STR);
 	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
-	$sth->bindValue(':image', 'null', PDO::PARAM_STR);
+	$sth->bindValue(':image', 'uploads/'.uniqid().'.'.pathinfo($_FILES['monFichier']['name']), PDO::PARAM_STR);
 	$sth->execute();
 }
 	var_dump($publishedArticles);
 
 //Gestion envoi de fichier
-/*
+
 if(array_key_exists('monFichier', $_FILES))
 	{
 		if($_FILES['monFichier']['error'] == 0)
@@ -65,8 +65,8 @@ if(array_key_exists('monFichier', $_FILES))
 				{
 					move_uploaded_file($_FILES['monFichier']['tmp_name'], 'uploads/'.uniqid().'.'.pathinfo($_FILES['monFichier']['name'], PATHINFO_EXTENSION));
 
-					header('Location: ./');
-					exit;
+					//header('Location: ./');
+					//exit;
 				}
 				else
 				{
@@ -83,8 +83,8 @@ if(array_key_exists('monFichier', $_FILES))
 			echo 'Le fichier n\'a pas pu être récupéré…';
 		}
 	}
-*/
 
 
+var_dump($_FILES);
 
 	include 'dashboard.phtml';
