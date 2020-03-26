@@ -13,8 +13,10 @@
 	<h3>Vos articles publiés</h3>
 	<h3>Publier un nouvel article</h3>
 	<form action="dashboard.php" method="post">
-		<input type='text' name="title" placeholder="titre">
+		<input type='text' name='title' placeholder="titre">
 		<input type='text' name='content' placeholder="contenu">
+		<input type="hidden" name="MAX_FILE_SIZE" value="3000000">
+		<input type="file" name="monFichier" accept="image/png, image/jpeg">
 		<button type="submit">Publier</button>
 	</form>
 </body>
