@@ -25,6 +25,7 @@ $dbh = new PDO
 	}
 
 
+
 // requête qui récupère le username du membre connecté
 	$query = 'SELECT username FROM writers WHERE id= :iduser';
 	$sth = $dbh->prepare($query);
@@ -41,21 +42,8 @@ $dbh = new PDO
 	$sth->execute();
 	$publishedArticles = $sth->fetch();
 
-//Pour publication nouvel article
-if(!empty($_POST)) {
-	$query = 'INSERT INTO posts (title, content, writerid, image) VALUES (:title, :content, :writerid, :image)';
-	$sth = $dbh->prepare($query);
-	$sth->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
-	$sth->bindValue(':content', $_POST['content'], PDO::PARAM_STR);
-	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
-	$sth->bindValue(':image', 'uploads/'.uniqid().'.'.pathinfo($_FILES['monFichier']['name']), PDO::PARAM_STR);
-	$sth->execute();
-}
-	var_dump($publishedArticles);
 
-//Gestion envoi de fichier
-
-if(array_key_exists('monFichier', $_FILES))
+	if(array_key_exists('monFichier', $_FILES))
 	{
 		if($_FILES['monFichier']['error'] == 0)
 		{
@@ -63,7 +51,12 @@ if(array_key_exists('monFichier', $_FILES))
 			{
 				if($_FILES['monFichier']['size'] <= 3000000)
 				{
-					move_uploaded_file($_FILES['monFichier']['tmp_name'], 'uploads/'.uniqid().'.'.pathinfo($_FILES['monFichier']['name'], PATHINFO_EXTENSION));
+					//move_uploaded_file($_FILES['monFichier']['tmp_name'], 'uploads/'.uniqid().'.'.pathinfo($_FILES['monFichier']['name'], PATHINFO_EXTENSION));
+
+
+					$urlImage = uniqid() . "." . pathinfo($_FILES['monFichier']['name'], PATHINFO_EXTENSION);
+					move_uploaded_file($_FILES['monFichier']['tmp_name'], 'uploads/' . $urlImage);
+
 
 					//header('Location: ./');
 					//exit;
@@ -83,6 +76,23 @@ if(array_key_exists('monFichier', $_FILES))
 			echo 'Le fichier n\'a pas pu être récupéré…';
 		}
 	}
+
+//Pour publication nouvel article
+if(!empty($_POST)) {
+	$query = 'INSERT INTO posts (title, content, writerid, image) VALUES (:title, :content, :writerid, :image)';
+	$sth = $dbh->prepare($query);
+	$sth->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
+	$sth->bindValue(':content', $_POST['content'], PDO::PARAM_STR);
+	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
+	$sth->bindValue(':image', $urlImage, PDO::PARAM_STR);
+	$sth->execute();
+}
+	var_dump($publishedArticles);
+
+	var_dump($_FILES['monFichier']['name']);
+//Gestion envoi de fichier
+
+
 
 
 var_dump($_FILES);
