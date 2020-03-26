@@ -40,7 +40,7 @@ $dbh = new PDO
 	$sth = $dbh->prepare($query);
 	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
 	$sth->execute();
-	$publishedArticles = $sth->fetch();
+	$publishedArticles = $sth->fetchAll();
 
 
 	if(array_key_exists('monFichier', $_FILES))
@@ -89,7 +89,6 @@ if(!empty($_POST)) {
 }
 	var_dump($publishedArticles);
 
-	var_dump($_FILES['monFichier']['name']);
 //Gestion envoi de fichier
 
 

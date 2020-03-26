@@ -11,6 +11,14 @@
 	</form>
 	<h3>Bonjour <?php echo $usernameSession['username'];?> !</h3>
 	<h3>Vos articles publiés</h3>
+	<?php foreach($publishedArticles as $key => $article): ?>
+			
+				
+					<h4><?= $article['title'] ?></h4>
+					<h4><?= $article['publication_date']; ?></h4>
+				
+			
+	<?php endforeach;?>
 	<h3>Publier un nouvel article</h3>
 	<form action="dashboard.php" method="post" enctype="multipart/form-data">
 		<input type='text' name='title' placeholder="titre">
