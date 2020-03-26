@@ -28,7 +28,7 @@
 		{
 			session_start();
 
-			$_SESSION['authentification'] = intval($user['id']);
+			$_SESSION['userid'] = intval($user['id']);
 
 			//	Redirection vers la page privée
 			header('Location: ./dashboard.php');

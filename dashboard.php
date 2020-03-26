@@ -12,9 +12,10 @@ $dbh = new PDO
 );
 
 	session_start();
+	var_dump($_SESSION['authentification']);
 
 	//	Si l'utilisateur n'est pas authentifié
-	if(!array_key_exists('authentification', $_SESSION))
+	if(!array_key_exists('userid', $_SESSION))
 	{
 		//	Redirection vers la page d'accueil
 		header('Location: ./');
@@ -24,14 +25,13 @@ $dbh = new PDO
 
 
 	
-	$query = 'SELECT id, username, hashed_password FROM writers WHERE username = :email';
+
+	$query = 'SELECT username FROM writers WHERE id= :iduser';
 	$sth = $dbh->prepare($query);
-	$sth->bindValue(':email', trim($_POST['username']), PDO::PARAM_STR);
+	$sth->bindValue(':iduser', trim($_SESSION['authentification']), PDO::PARAM_STR);
 	$sth->execute();
-	$user = $sth->fetch();
+	$usernameSession = $sth->fetch();
 
-	var_dump($user);
-
-	// Je ne me souviens plus comment on récupère les infos de l'utilisateur dont la session est active. Var_dump renvoie 'false'.
+	var_dump($usernameSession);
 
 	include 'dashboard.phtml';
