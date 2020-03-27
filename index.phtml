@@ -11,14 +11,15 @@
 
     <?php foreach($allArticles as $key => $article): ?>
 			
-				
-            <h4><?= $article['title'] ?></h4>
+			<div class="home-post">
+            <a href="http://localhost/projets/community_blog/article.php?id=<?=$article['postid'];?>"><h4><?= $article['title'] ?></h4></a>
             <h4>Publié le <?= $article['publication_date']; ?></h4>
-            <h4>Par <?= $article['username']; ?></h4>
-            <img src="http://localhost/projets/community_blog/uploads/<?= $article['image']; ?>">
-            <p><?= $article['content']; ?></p>
-        
-    
+            <h4>Par  <a href="http://localhost/projets/community_blog/writer.php?id=<?=$article['id'];?>"><?= $article['username']; ?></a></h4>
+            <a href="http://localhost/projets/community_blog/article.php?id=<?=$article['postid'];?>"> <img class="home-post-img" src="http://localhost/projets/community_blog/uploads/<?= $article['image']; ?>"></a>
+            </div>
+
+
+
 <?php endforeach;?>
 </body>
 </html>

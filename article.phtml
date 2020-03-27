@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1><?php echo $theArticle['title'];?></h1>
+    <p>par  <a href="http://localhost/projets/community_blog/writer.php?id=<?=$theArticle['writerid'];?>"><?= $theArticle['username']; ?></a>
+    <img src="http://localhost/projets/community_blog/uploads/<?= $theArticle['image']; ?>">
+    <p><?=$theArticle['content'];?></p>
+    
+</body>
+</html>

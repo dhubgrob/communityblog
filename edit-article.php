@@ -32,7 +32,7 @@ if(!empty($_POST)) {
 
 $query = 'DELETE FROM POSTS WHERE id = ?';
 $sth = $dbh->prepare($query);
-$sth -> bindValue(1, $_GET['idedit'], PDO::PARAM_INT);
+$sth -> bindValue(1, $_POST['idedit'], PDO::PARAM_INT);
 $sth->execute();
 
 

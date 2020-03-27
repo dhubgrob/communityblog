@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publications de <?= $basicInfo['username']; ?></title>
+</head>
+<body>
+
+<h1>Publications de <?= $basicInfo['username']; ?></h1>
+
+<?php foreach($theArticles as $key => $thePublishedArticle): ?>
+			
+        <a href="http://localhost/projets/community_blog/article.php?id=<?=$thePublishedArticle['postid'];?>"><h2><?= $thePublishedArticle['title'];?></h2></a>
+        <p>Publié le <?= $thePublishedArticle['publication_date'];?></p>
+            
+
+<?php endforeach;?>
+
+    
+</body>
+</html>
