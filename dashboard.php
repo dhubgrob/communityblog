@@ -26,7 +26,7 @@ $dbh = new PDO
 // suppression d'article
 
 array_flip($_GET);
-var_dump($_GET);
+
         if(array_key_exists('id', $_GET) AND intval($_GET['id']) > 0)
         {
 

@@ -4,11 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications de <?= $basicInfo['username']; ?></title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
+<nav>
+        <div id="name-site">
+		<a href="http://localhost/projets/community_blog/">community_blog</a>
+        </div>
+        <div id="nav-items">
+</div>
+</nav>
 
 <h1>Publications de <?= $basicInfo['username']; ?></h1>
-
+<div id="container-published-posts">
 <?php foreach($theArticles as $key => $thePublishedArticle): ?>
 			
         <a href="http://localhost/projets/community_blog/article.php?id=<?=$thePublishedArticle['postid'];?>"><h2><?= $thePublishedArticle['title'];?></h2></a>
@@ -16,7 +24,10 @@
             
 
 <?php endforeach;?>
+</div>
 
-    
+<footer id="footer-writer">
+    <p>Ceci est un footer</p>
+</footer>
 </body>
 </html>

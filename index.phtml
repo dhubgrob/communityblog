@@ -4,22 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>accueil</title>
+    <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <a href="signup.php">inscription</a>
+    <nav>
+        <div id="name-site">
+            community_blog
+        </div>
+        <div id="nav-items">
+    <a href="signup.php">inscription</a><br>
     <a href="login.php">connexion</a>
-
+</div>
+</nav>
+<main>
+    <h2>Derniers articles publiés</h2><br>
+    <section id="latest-posts">
     <?php foreach($allArticles as $key => $article): ?>
 			
 			<div class="home-post">
             <a href="http://localhost/projets/community_blog/article.php?id=<?=$article['postid'];?>"><h4><?= $article['title'] ?></h4></a>
-            <h4>Publié le <?= $article['publication_date']; ?></h4>
+            <p>Publié le <?= $article['publication_date']; ?></p>
             <h4>Par  <a href="http://localhost/projets/community_blog/writer.php?id=<?=$article['id'];?>"><?= $article['username']; ?></a></h4>
             <a href="http://localhost/projets/community_blog/article.php?id=<?=$article['postid'];?>"> <img class="home-post-img" src="http://localhost/projets/community_blog/uploads/<?= $article['image']; ?>"></a>
             </div>
-
-
-
-<?php endforeach;?>
+    <?php endforeach;?>
+    </section>
+    </main>
 </body>
+<footer>
+    <p>Ceci est un footer</p>
+</footer>
 </html>

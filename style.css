@@ -1,0 +1,147 @@
+body {
+    font-family: sans-serif;
+    background-color: lightblue;
+    margin: 0;
+    padding: 0;
+}
+
+nav {
+    background-color: white;
+    display: flex;
+    justify-content: space-between;
+}
+
+#name-site {
+    font-size: 3.5rem;
+    padding-bottom: 10px;
+    padding-left: 10px;
+}
+
+#name-site a {
+    text-decoration: none;
+}
+
+#nav-items {
+    padding: 20px;
+    right: 0;
+}
+
+#latest-posts, #container-published {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+}
+
+.home-post, .published {
+    width: 200px;
+    background-color: white;
+    border-radius: 5px;
+    text-align: center;
+    padding: 20px;
+    margin: 50px;
+}
+
+.home-post img {
+    width: 180px;
+}
+
+main h2 {
+    margin-left :  130px;
+    font-size: 3rem;
+    margin-top: 100px;
+    font-weight: 200;
+}
+
+#container-form-signup {
+    background-color: white;
+    width: 40vw;
+    margin-left: 100px;
+    padding: 50px;
+    border-radius: 5px;
+    margin-top: 100px;
+}
+
+#published-posts h3 {
+    margin-left: 50px;
+}
+
+#ajout-article {
+    background-color: white;
+    width: 70vw;
+    border-radius: 5px;
+    padding: 30px;
+    margin-left: 10vw;
+    margin-top: 50px;
+}
+
+#container-published-posts {
+    background-color: white;
+    width: 60vw;
+    border-radius: 5px;
+    padding: 50px;
+    margin-left: 10vw;
+}
+
+h1 {
+    margin-left: 10vw;
+    margin-top: 50px;
+}
+
+#titre-published {
+    margin-left: 50px;
+    font-size: 2rem;
+}
+
+footer {
+    height: 50px;
+    background-color: black;
+}
+
+footer p {
+    color: lightgray;
+    font-weight: 400;
+    padding-top: 15px;
+    padding-left: 10px;
+}
+
+a {
+    color: black;
+}
+
+#container-post {
+    margin-top: 40px;
+    width: 70vw;
+    margin-left: 15vw;
+    background-color: white;
+    padding: 40px;
+    border-radius: 5px;
+}
+
+#container-post img {
+    max-width: 1000px;
+}
+
+#container-add-comment {
+    margin-top: 40px;
+    width: 70vw;
+    margin-left: 15vw;
+    background-color: white;
+    padding: 40px;
+    border-radius: 5px;
+}
+
+#comment-thread {
+    margin-top: 40px;
+    width: 70vw;
+    margin-left: 15vw;
+    background-color: white;
+    padding: 40px;
+    border-radius: 5px;
+    margin-bottom: 100px;
+}
+
+#footer-writer, #footer-signup, #footer-login {
+    margin-top: 320px;
+}

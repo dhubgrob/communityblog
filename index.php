@@ -16,5 +16,4 @@ $query = 'SELECT posts.id AS postid, posts.title, posts.image, posts.content, po
 $sth = $dbh->prepare($query);
 $sth->execute();
 $allArticles = $sth->fetchAll();
-var_dump($allArticles);
 include 'index.phtml';

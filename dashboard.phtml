@@ -4,36 +4,60 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Tableau de bord</title>
+	<link href="style.css" rel="stylesheet">
 </head>
 <body>
+<nav>
+        <div id="name-site">
+		<a href="http://localhost/projets/community_blog/">community_blog</a>
+        </div>
+        <div id="nav-items">
+		Bonjour <?php echo $usernameSession['username'];?> !
+</div>
+</nav>
 	<form action="dashboard.php" method="post">
 		<input type="hidden" name="username">
 	</form>
-	<h3>Bonjour <?php echo $usernameSession['username'];?> !</h3>
+
+
+	
+
+<div id="published-posts">
+	<div id="titre-published">
 	<h3>Vos articles publiés</h3>
+</div>
+	<div id="container-published">
 	<?php foreach($publishedArticles as $key => $article): ?>
 			
-				
-					<h4><?= $article['title'] ?></h4>
-					<h4><?= $article['publication_date']; ?></h4>
+					<div class="published">
+					<a href="http://localhost/projets/community_blog/article.php?id=<?=$article['id'];?>"><h4><?= $article['title'] ?></h4></a>
+					<p>Publié le <?= $article['publication_date']; ?></p>
 					<form action="dashboard.php" method="get">
 					<input type="hidden" name="id" value="<?=$article['id'];?>">
 					<button type="input">supprimer</button>
 					</form>
 					<form action="edit-article.php" method="get">
-					<input type="hidden" name="idedit" value="<?=$article['id'];?>">
+					<input type="hidden" name="idedit" value="<?=$article['id'];?>"><br>
 					<button type="input">modifier</button>
 					</form>
+					</div>
 				
 			
 	<?php endforeach;?>
+	</div>
+</div>
+	<div id="ajout-article">
 	<h3>Publier un nouvel article</h3>
 	<form action="dashboard.php" method="post" enctype="multipart/form-data">
-		<input type='text' name='title' placeholder="titre">
-		<input type='text' name='content' placeholder="contenu">
-		<input type="hidden" name="MAX_FILE_SIZE" value="3000000">
-		<input type="file" name="monFichier" accept="image/png, image/jpeg">
+		<input type='text' name='title' placeholder="titre"><br><br>
+		<input type='text' name='content' placeholder="contenu"><br><br>
+		<input type="hidden" name="MAX_FILE_SIZE" value="3000000"><br><br>
+		<input type="file" name="monFichier" accept="image/png, image/jpeg"><br><br>
 		<button type="submit">Publier</button>
 	</form>
+	</div>
 </body>
+<footer>
+    <p>Ceci est un footer</p>
+</footer>
 </html>
