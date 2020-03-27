@@ -10,6 +10,17 @@
     <p>par  <a href="http://localhost/projets/community_blog/writer.php?id=<?=$theArticle['writerid'];?>"><?= $theArticle['username']; ?></a>
     <img src="http://localhost/projets/community_blog/uploads/<?= $theArticle['image']; ?>">
     <p><?=$theArticle['content'];?></p>
-    
+
+    <form action="article.php" method="post">
+        <input type='text' name="pseudo" placeholder="pseudo">
+        <input type='text' name="commentaire" placeholder="votre commentaire">
+        <input type="hidden" name="postidcomment" value="<?= $theArticle['postid']; ?>">
+        <button type="submit">Envoyer</button>
+    </form>
+    <h2>Commentaires</h2>
+    <?php foreach($allComments as $key => $comment): ?>
+        <p> Commentaire de : <?php echo $comment['username'];?></p>
+        <p><?php echo $comment['content']; ?>
+    <?php endforeach; ?>
 </body>
 </html>

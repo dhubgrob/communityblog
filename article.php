@@ -11,12 +11,41 @@ $dbh = new PDO
     ]
 );
 
-
+// pour récupérer l'article
 $query = 'SELECT posts.id AS postid, posts.title, posts.image, posts.content, posts.publication_date, posts.writerid, writers.id, writers.username FROM posts INNER JOIN writers ON writers.id = posts.writerid WHERE posts.id = :postid';
 $sth = $dbh->prepare($query);
-$sth->bindValue(':postid', trim($_GET['id']), PDO::PARAM_STR);
+$sth->bindValue(':postid', $_GET['id'], PDO::PARAM_STR);
 $sth->execute();
 $theArticle = $sth->fetch();
+// pour récupérer les commentaires de l'article
+
+$query = 'SELECT username, content, articleid FROM comments WHerE articleid=:articleid';
+$sth = $dbh->prepare($query);
+$sth->bindValue(':articleid', $theArticle['postid'], PDO::PARAM_STR);
+$sth->execute();
+$allComments = $sth->fetchAll();
+
+
+//gestion ajout de commentaires
+if(!empty($_POST))
+{
+
+
+
+    $query = 'INSERT INTO comments (username, content, articleid) VALUES (:username, :content, :articleid)';
+    $sth = $dbh->prepare($query);
+    $sth->bindValue(':username', $_POST['pseudo'], PDO::PARAM_STR);
+    $sth->bindValue(':content', $_POST['commentaire'], PDO::PARAM_STR);
+    $sth->bindValue(':articleid', $_POST["postidcomment"], PDO::PARAM_STR);
+    $sth->execute();
+
+    var_dump($_POST);
+header('Location:index.php');
+    exit;
+}
+
+
+
 
 
 include 'article.phtml';
