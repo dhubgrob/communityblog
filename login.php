@@ -18,7 +18,7 @@
 		
 		$query = 'SELECT id, username, hashed_password FROM writers WHERE username = :email';
 		$sth = $dbh->prepare($query);
-		$sth->bindValue(':email', trim($_POST['username']), PDO::PARAM_STR);
+		$sth->bindValue(':email', htmlspecialchars(trim($_POST['username'])), PDO::PARAM_STR);
 		$sth->execute();
 		$user = $sth->fetch();
 

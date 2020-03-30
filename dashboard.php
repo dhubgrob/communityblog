@@ -23,19 +23,6 @@ $dbh = new PDO
 		exit;
 	}
 
-// suppression d'article
-
-array_flip($_GET);
-
-        if(array_key_exists('id', $_GET) AND intval($_GET['id']) > 0)
-        {
-
-            $query = 'DELETE FROM POSTS WHERE id = ?';
-            $sth = $dbh->prepare($query);
-            $sth -> bindValue(1, $_GET['id'], PDO::PARAM_INT);
-            $sth->execute();
-		}
-
 // requête qui récupère le username du membre connecté
 	$query = 'SELECT username FROM writers WHERE id= :iduser';
 	$sth = $dbh->prepare($query);
@@ -59,15 +46,8 @@ array_flip($_GET);
 			{
 				if($_FILES['monFichier']['size'] <= 3000000)
 				{
-					//move_uploaded_file($_FILES['monFichier']['tmp_name'], 'uploads/'.uniqid().'.'.pathinfo($_FILES['monFichier']['name'], PATHINFO_EXTENSION));
-
-
 					$urlImage = uniqid() . "." . pathinfo($_FILES['monFichier']['name'], PATHINFO_EXTENSION);
 					move_uploaded_file($_FILES['monFichier']['tmp_name'], 'uploads/' . $urlImage);
-
-
-					//header('Location: ./');
-					//exit;
 				}
 				else
 				{
@@ -89,8 +69,8 @@ array_flip($_GET);
 if(!empty($_POST)) {
 	$query = 'INSERT INTO posts (title, content, writerid, image) VALUES (:title, :content, :writerid, :image)';
 	$sth = $dbh->prepare($query);
-	$sth->bindValue(':title', $_POST['title'], PDO::PARAM_STR);
-	$sth->bindValue(':content', $_POST['content'], PDO::PARAM_STR);
+	$sth->bindValue(':title', htmlspecialchars($_POST['title']), PDO::PARAM_STR);
+	$sth->bindValue(':content', htmlspecialchars($_POST['content']), PDO::PARAM_STR);
 	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
 	$sth->bindValue(':image', $urlImage, PDO::PARAM_STR);
 	$sth->execute();

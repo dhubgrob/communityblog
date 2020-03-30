@@ -32,7 +32,7 @@ if(!empty($_POST)) {
 
 $query = 'DELETE FROM POSTS WHERE id = ?';
 $sth = $dbh->prepare($query);
-$sth -> bindValue(1, $_POST['idedit'], PDO::PARAM_INT);
+$sth -> bindValue(1, $_GET['idedit'], PDO::PARAM_INT);
 $sth->execute();
 
 
@@ -45,10 +45,6 @@ $sth->execute();
 	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
 	$sth->bindValue(':image', 'null', PDO::PARAM_STR);
     $sth->execute();
-
-
-    
-
 }
 include 'edit-article.phtml';
 }

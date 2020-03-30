@@ -32,7 +32,7 @@
 					<div class="published">
 					<a href="http://localhost/projets/community_blog/article.php?id=<?=$article['id'];?>"><h4><?= $article['title'] ?></h4></a>
 					<p>Publié le <?= $article['publication_date']; ?></p>
-					<form action="dashboard.php" method="get">
+					<form action="delete.php" method="get">
 					<input type="hidden" name="id" value="<?=$article['id'];?>">
 					<button type="input">supprimer</button>
 					</form>
