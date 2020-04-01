@@ -7,13 +7,13 @@
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-<nav>
-        <div id="name-site">
-		<a href="http://localhost/projets/community_blog/">community_blog</a>
-        </div>
-        <div id="nav-items">
-</div>
-</nav>
+<?php 
+if(!empty($_SESSION)) {
+    include('nav_logged.phtml');
+} else {
+    include('nav.phtml');
+}
+ ?>
 
 <h1>Publications de <?= $basicInfo['username']; ?></h1>
 <div id="container-published-posts">

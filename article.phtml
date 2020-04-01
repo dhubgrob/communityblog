@@ -1,47 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo $theArticle['title'];?></title>
+    <title><?php echo $theArticle['title']; ?></title>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
-<nav>
-        <div id="name-site">
-		<a href="http://localhost/projets/community_blog/">community_blog</a>
-        </div>
-        <div id="nav-items">
-		
-</div>
-</nav>
-<div id="container-post">
-    <h1><?php echo $theArticle['title'];?></h1><br>
-    <p>par  <a href="http://localhost/projets/community_blog/writer.php?id=<?=$theArticle['writerid'];?>"><?= $theArticle['username']; ?></a><br>
-    <img src="http://localhost/projets/community_blog/uploads/<?= $theArticle['image']; ?>">
-    <p><?=$theArticle['content'];?></p>
-</div>
+    <?php include('nav.phtml'); ?>
+    <div id="container-post">
+        <h1><?php echo $theArticle['title']; ?></h1><br>
+        <p>par <a href="http://localhost/projets/community_blog/writer.php?id=<?= $theArticle['writerid']; ?>"><?= $theArticle['username']; ?></a><br>
+            <img src="http://localhost/projets/community_blog/uploads/<?= $theArticle['image']; ?>">
+            <p><?= $theArticle['content']; ?></p>
+    </div>
 
-<div id="container-add-comment">
-    <h2>Ajouter un commentaire</h2>
-    <form action="article.php" method="post">
-        <input type='text' name="pseudo" placeholder="pseudo">
-        <input type='text' name="commentaire" placeholder="votre commentaire">
-        <input type="hidden" name="postidcomment" value="<?= $theArticle['postid']; ?>">
-        <button type="submit">Envoyer</button>
-    </form>
-</div>
+    <div id="container-add-comment">
+        <h2>Ajouter un commentaire</h2>
+        <form action="article.php" method="post">
+            <input type='text' name="pseudo" placeholder="pseudo">
+            <input type='text' name="commentaire" placeholder="votre commentaire">
+            <input type="hidden" name="postidcomment" value="<?= $theArticle['postid']; ?>">
+            <button type="submit">Envoyer</button>
+        </form>
+    </div>
 
-    
-<div id="comment-thread">
-<h2>Commentaires</h2>
-    <?php foreach($allComments as $key => $comment): ?>
-        <p> Commentaire de : <?php echo $comment['username'];?></p>
-        <p><?php echo $comment['content']; ?>
-    <?php endforeach; ?>
+
+    <div id="comment-thread">
+        <h2>Commentaires</h2>
+        <?php foreach ($allComments as $key => $comment) : ?>
+            <p> Commentaire de : <?php echo $comment['username']; ?></p>
+            <p><?php echo $comment['content']; ?>
+            <?php endforeach; ?>
     </div>
     <footer>
-    <p>Ceci est un footer</p>
-</footer>
+        <p>Ceci est un footer</p>
+    </footer>
 </body>
+
 </html>

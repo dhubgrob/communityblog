@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>éditer</title>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
+    <?php
+    if (!empty($_SESSION)) {
+        include('nav_logged.phtml');
+    } else {
+        include('nav.phtml');
+    }
+    ?>
     <form action="edit-article.php" method="post">
-        <input type="hidden" name="newid" value="<?php echo $articleEdition['id']; ?>">  
+        <input type="hidden" name="newid" value="<?php echo $articleEdition['id']; ?>">
         <input type="text" name="newTitle" value="<?php echo $articleEdition['title']; ?>">
         <input type="text" name="newContent" value="<?php echo $articleEdition['content']; ?>">
         <input type="hidden" name="MAX_FILE_SIZE" value="3000000">
-        <input type="file" name="newMonFichier" accept="image/png, image/jpeg"  value="<?php echo $articleEdition['image']; ?>">
+        <input type="file" name="newMonFichier" accept="image/png, image/jpeg" value="<?php echo $articleEdition['image']; ?>">
         <button type="input">Mettre à jour</button>
     </form>
 </body>
+
 </html>
