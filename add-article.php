@@ -12,16 +12,21 @@ $dbh = new PDO
 	]
 );
 
+// Lancement de la session
+session_start();
+
+//	Si l'utilisateur n'est pas authentifié
+if(!array_key_exists('userid', $_SESSION))
+{
+    //	Redirection vers la page d'accueil
+    header('Location: ./');
+    exit;
+}
 
 if(!empty($_POST)) {
-	$query = 'INSERT INTO posts (title, content, writerid, image) VALUES (:title, :content, :writerid, :image)';
-	$sth = $dbh->prepare($query);
-	$sth->bindValue(':title', htmlspecialchars($_POST['title']), PDO::PARAM_STR);
-	$sth->bindValue(':content', htmlspecialchars($_POST['content']), PDO::PARAM_STR);
-	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
-	$sth->bindValue(':image', $urlImage, PDO::PARAM_STR);
-	$sth->execute();
-}
+
+
+
 
 // gestion des upload d'images
 if(array_key_exists('monFichier', $_FILES))
@@ -34,6 +39,21 @@ if(array_key_exists('monFichier', $_FILES))
             {
                 $urlImage = uniqid() . "." . pathinfo($_FILES['monFichier']['name'], PATHINFO_EXTENSION);
                 move_uploaded_file($_FILES['monFichier']['tmp_name'], 'uploads/' . $urlImage);
+
+
+                
+
+	$query = 'INSERT INTO posts (title, content, writerid, image) VALUES (:title, :content, :writerid, :image)';
+	$sth = $dbh->prepare($query);
+	$sth->bindValue(':title', htmlspecialchars($_POST['title']), PDO::PARAM_STR);
+	$sth->bindValue(':content', htmlspecialchars($_POST['content']), PDO::PARAM_STR);
+	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
+	$sth->bindValue(':image', $urlImage, PDO::PARAM_STR);
+    $sth->execute();
+    
+    header('Location: http://localhost/projets/community_blog/dashboard.php');
+    exit;
+
             }
             else
             {
@@ -49,4 +69,9 @@ if(array_key_exists('monFichier', $_FILES))
     {
         echo 'Le fichier n\'a pas pu être récupéré…';
     }
+}
+
+
+
+
 }

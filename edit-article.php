@@ -13,8 +13,6 @@ $dbh = new PDO
 
 session_start();
 
-var_dump($_GET);
-
 if(array_key_exists("idedit", $_GET)) {
 
     $query = 'SELECT * FROM posts WHERE id = ?';
@@ -32,7 +30,7 @@ if(!empty($_POST)) {
 
 $query = 'DELETE FROM POSTS WHERE id = ?';
 $sth = $dbh->prepare($query);
-$sth -> bindValue(1, $_GET['idedit'], PDO::PARAM_INT);
+$sth -> bindValue(1, $articleEdition['id'], PDO::PARAM_INT);
 $sth->execute();
 
 
@@ -45,6 +43,11 @@ $sth->execute();
 	$sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
 	$sth->bindValue(':image', 'null', PDO::PARAM_STR);
     $sth->execute();
+    $articleEdited = $sth->fetch();
+    var_dump($articleEdited);
+
+    //header('Location: http://localhost/projets/community_blog/dashboard.php');
+	//exit;
 }
 include 'edit-article.phtml';
 }

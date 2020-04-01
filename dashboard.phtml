@@ -50,11 +50,14 @@
 	<h3>Publier un nouvel article</h3>
 	<form action="add-article.php" method="post" enctype="multipart/form-data">
 		<input type='text' name='title' placeholder="titre"><br><br>
-		<input type='text' name='content' placeholder="contenu"><br><br>
+		<textarea rows="8" cols="50" type='text' name='content' placeholder="contenu"></textarea><br><br>
 		<input type="hidden" name="MAX_FILE_SIZE" value="3000000"><br><br>
 		<input type="file" name="monFichier" accept="image/png, image/jpeg"><br><br>
 		<button type="submit">Publier</button>
 	</form>
+	</div>
+	<div id="logout">
+	<a href="logout.php">Logout</a>
 	</div>
 </body>
 <footer>

@@ -22,5 +22,8 @@ array_flip($_GET);
             $query = 'DELETE FROM POSTS WHERE id = ?';
             $sth = $dbh->prepare($query);
             $sth -> bindValue(1, $_GET['id'], PDO::PARAM_INT);
-            $sth->execute();
+			$sth->execute();
+			
+			header('Location: http://localhost/projets/community_blog/dashboard.php');
+			exit;
 		}
