@@ -16,7 +16,7 @@
         include('nav.phtml');
     }
     ?>
-    <form action="edit-article.php" method="post">
+    <form action="edit-article.php" method="post" enctype="multipart/form-data">
         <input type="hidden" name="newid" value="<?php echo $articleEdition['id']; ?>">
         <input type="text" name="newTitle" value="<?php echo $articleEdition['title']; ?>">
         <input type="text" name="newContent" value="<?php echo $articleEdition['content']; ?>">

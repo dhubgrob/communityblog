@@ -12,7 +12,6 @@ $dbh = new PDO(
 
 session_start();
 
-if (array_key_exists("idedit", $_GET)) {
 
     $query = 'SELECT * FROM posts WHERE id = ?';
     $sth = $dbh->prepare($query);
@@ -27,26 +26,28 @@ if (array_key_exists("idedit", $_GET)) {
 
         // suppression de l'ancien article
 
-        $query = 'DELETE FROM POSTS WHERE id = ?';
-        $sth = $dbh->prepare($query);
-        $sth->bindValue(1, $articleEdition['id'], PDO::PARAM_INT);
-        $sth->execute();
-
+       
 
         // ajout nouvel article
 
-        $query = 'INSERT INTO posts (title, content, writerid, image) VALUES (:title, :content, :writerid, :image)';
+        $query = 'UPDATE posts 
+        SET title=:title,
+         content=:content,
+         writerid=:writerid,
+         image=:image
+        WHERE id = :id';
         $sth = $dbh->prepare($query);
         $sth->bindValue(':title', $_POST['newTitle'], PDO::PARAM_STR);
         $sth->bindValue(':content', $_POST['newContent'], PDO::PARAM_STR);
         $sth->bindValue(':writerid', $_SESSION['userid'], PDO::PARAM_STR);
+        $sth->bindValue(':id', $_POST['newid'], PDO::PARAM_STR);
         $sth->bindValue(':image', 'null', PDO::PARAM_STR);
         $sth->execute();
-        $articleEdited = $sth->fetch();
-        var_dump($articleEdited);
 
-        //header('Location: http://localhost/projets/community_blog/dashboard.php');
-        //exit;
+
+        header('Location: http://localhost/projets/community_blog/dashboard.php');
+        exit;
     }
-    include 'edit-article.phtml';
-}
+    
+
+include 'edit-article.phtml';
