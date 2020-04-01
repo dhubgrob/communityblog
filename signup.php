@@ -2,6 +2,19 @@
 
 include 'signup.phtml';
 
+session_start();
+
+
+
+if(!empty($_SESSION)){
+// requête qui récupère le username du membre connecté
+$query = 'SELECT username FROM writers WHERE id= :iduser';
+$sth = $dbh->prepare($query);
+$sth->bindValue(':iduser', trim($_SESSION['userid']), PDO::PARAM_STR);
+$sth->execute();
+$usernameSession = $sth->fetch();
+}
+
 if (!empty($_POST)) {
 
 	$dbh = new PDO(

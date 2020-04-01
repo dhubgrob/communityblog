@@ -11,8 +11,17 @@ $dbh = new PDO(
         ]
     );
 
-// Lancement de la session
-session_start();
+    session_start();
+
+
+    if(!empty($_SESSION)){
+    // requête qui récupère le username du membre connecté
+    $query = 'SELECT username FROM writers WHERE id= :iduser';
+    $sth = $dbh->prepare($query);
+    $sth->bindValue(':iduser', trim($_SESSION['userid']), PDO::PARAM_STR);
+    $sth->execute();
+    $usernameSession = $sth->fetch();
+    }
 
 //	Si l'utilisateur n'est pas authentifié
 if (!array_key_exists('userid', $_SESSION)) {

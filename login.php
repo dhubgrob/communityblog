@@ -13,7 +13,17 @@ if (!empty($_POST)) {
 			]
 		);
 
-	session_start();
+		session_start();
+
+
+		if(!empty($_SESSION)){
+		// requête qui récupère le username du membre connecté
+		$query = 'SELECT username FROM writers WHERE id= :iduser';
+		$sth = $dbh->prepare($query);
+		$sth->bindValue(':iduser', trim($_SESSION['userid']), PDO::PARAM_STR);
+		$sth->execute();
+		$usernameSession = $sth->fetch();
+		}
 
 	$query = 'SELECT id, username, hashed_password FROM writers WHERE username = :email';
 	$sth = $dbh->prepare($query);

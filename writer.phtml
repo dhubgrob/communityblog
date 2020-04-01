@@ -1,33 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publications de <?= $basicInfo['username']; ?></title>
     <link href="style.css" rel="stylesheet">
 </head>
+
 <body>
-<?php 
-if(!empty($_SESSION)) {
-    include('nav_logged.phtml');
-} else {
-    include('nav.phtml');
-}
- ?>
+    <?php
+    if (!empty($_SESSION)) {
+        include('nav_logged.phtml');
+    } else {
+        include('nav.phtml');
+    }
+    ?>
 
-<h1>Publications de <?= $basicInfo['username']; ?></h1>
-<div id="container-published-posts">
-<?php foreach($theArticles as $key => $thePublishedArticle): ?>
-			
-        <a href="http://localhost/projets/community_blog/article.php?id=<?=$thePublishedArticle['postid'];?>"><h2><?= $thePublishedArticle['title'];?></h2></a>
-        <p>Publié le <?= $thePublishedArticle['publication_date'];?></p>
-            
+    <h1>Publications de <?= $basicInfo['username']; ?></h1>
+    <div id="container-published-posts">
+        <?php foreach ($theArticles as $key => $thePublishedArticle) : ?>
 
-<?php endforeach;?>
-</div>
+            <a href="http://localhost/projets/community_blog/article.php?id=<?= $thePublishedArticle['postid']; ?>">
+                <h2><?= $thePublishedArticle['title']; ?></h2>
+            </a>
+            <p>Publié le <?= $thePublishedArticle['publication_date']; ?></p>
 
-<footer id="footer-writer">
-    <p>Ceci est un footer</p>
-</footer>
+
+        <?php endforeach; ?>
+    </div>
+
+    <?php include('footer.phtml'); ?>
 </body>
+
 </html>

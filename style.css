@@ -24,6 +24,14 @@ nav {
 #nav-items {
     padding: 20px;
     right: 0;
+    width: 10vw;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+#nav-links {
+    padding-bottom: 0;
 }
 
 #latest-posts, #container-published {

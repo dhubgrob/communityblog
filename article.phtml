@@ -9,7 +9,13 @@
 </head>
 
 <body>
-    <?php include('nav.phtml'); ?>
+<?php
+    if (!empty($_SESSION)) {
+        include('nav_logged.phtml');
+    } else {
+        include('nav.phtml');
+    }
+    ?>
     <div id="container-post">
         <h1><?php echo $theArticle['title']; ?></h1><br>
         <p>par <a href="http://localhost/projets/community_blog/writer.php?id=<?= $theArticle['writerid']; ?>"><?= $theArticle['username']; ?></a><br>
@@ -20,9 +26,9 @@
     <div id="container-add-comment">
         <h2>Ajouter un commentaire</h2>
         <form action="article.php" method="post">
-            <input type='text' name="pseudo" placeholder="pseudo">
-            <input type='text' name="commentaire" placeholder="votre commentaire">
-            <input type="hidden" name="postidcomment" value="<?= $theArticle['postid']; ?>">
+            <input type='text' name="pseudo" placeholder="pseudo"><br><br>
+            <textarea rows="5" cols="30" type='text' name="commentaire" placeholder="votre commentaire"></textarea><br>
+            <input type="hidden" name="postidcomment" value="<?= $theArticle['postid']; ?>"><br>
             <button type="submit">Envoyer</button>
         </form>
     </div>
@@ -35,9 +41,9 @@
             <p><?php echo $comment['content']; ?>
             <?php endforeach; ?>
     </div>
-    <footer>
-        <p>Ceci est un footer</p>
-    </footer>
+
+    <?php  include('footer.phtml'); ?>
+   
 </body>
 
 </html>

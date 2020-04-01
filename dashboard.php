@@ -21,12 +21,16 @@ if (!array_key_exists('userid', $_SESSION)) {
 	exit;
 }
 
+
+
+if(!empty($_SESSION)){
 // requête qui récupère le username du membre connecté
 $query = 'SELECT username FROM writers WHERE id= :iduser';
 $sth = $dbh->prepare($query);
 $sth->bindValue(':iduser', trim($_SESSION['userid']), PDO::PARAM_STR);
 $sth->execute();
 $usernameSession = $sth->fetch();
+}
 
 // requête qui récupère les articles déjà publiés
 $query = 'SELECT title, publication_date, id FROM posts WHERE writerid= :writerid';

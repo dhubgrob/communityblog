@@ -1,11 +1,18 @@
 <nav>
     <a href="http://localhost/projets/community_blog/">
         <div id="name-site">
-            community blog
+            community <br>blog
         </div>
     </a>
+   
     <div id="nav-items">
+        <div id="nav-links">
+        <div id="nav-greetings">
+       <p> Hello <?php echo $usernameSession['username']; ?> !</p>
+</div>
         <a href="dashboard.php">dashboard</a><br>
         <a href="logout.php">logout</a>
+        </div>
+
     </div>
 </nav>
